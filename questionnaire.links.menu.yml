@@ -1,0 +1,5 @@
+questionnare.main:
+  title: 'Questionnare Module'
+  description: 'Main page'
+  parent: system.admin
+  url: internal:/questionnaire

@@ -1,0 +1,7 @@
+name: 'Questionnaire'
+description: 'Custom module for ask user'
+type: module
+package: Storleden
+core: 8.x
+#interface translation project: Questionnaire
+#interface translation server pattern: modules/custom/questionnaire/translations/%language.po

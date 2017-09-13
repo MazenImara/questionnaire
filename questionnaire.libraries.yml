@@ -1,0 +1,10 @@
+questionnaire_lib:
+  version: 1.x
+  css:
+    layout:
+      css/questionnaire.css: {}
+  js:
+    js/main.js: {}
+  dependencies:
+    - core/drupal.ajax
+    - core/jquery

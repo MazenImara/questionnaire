@@ -1,0 +1,61 @@
+{{content.questionnaires.title}}
+
+{% for question in content.questions %}
+  <br><a href="/questionnaire/question/{{question.id}}">{{question.body}}</a> 
+	<form {{content.deleteQuestionForm.attributes }} method="post">
+		{{ content.deleteQuestionForm.form_build_id }}
+		{{ content.deleteQuestionForm.form_token }}
+		{{ content.deleteQuestionForm.form_id }}
+		{{ content.deleteQuestionForm.subject }}
+		{{ content.deleteQuestionForm.message }}
+		<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label">
+			<input data-drupal-selector="edit-id" type="text" id="edit-id" name="id" value="{{question.id}}" size="60" maxlength="128" placeholder="questionId" class="form-text required" required="required" aria-required="true" style="display:none">
+		</div>				
+		{{ content.deleteQuestionForm.actions.submit }}
+	</form>    
+{% endfor %}
+
+
+<form {{content.addQuestionForm.attributes }} method="post">
+	{{ content.addQuestionForm.form_build_id }}
+	{{ content.addQuestionForm.form_token }}
+	{{ content.addQuestionForm.form_id }}
+	{{ content.addQuestionForm.subject }}
+	{{ content.addQuestionForm.message }}
+	{{ content.addQuestionForm.body }}
+	{{ content.addQuestionForm.multichoice }}
+	<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-questionnaireid form-item-questionnaireid form-no-label">
+	<input data-drupal-selector="edit-questionnaireid" type="text" id="edit-questionnaireid" name="questionnaireId" value="{{content.questionnaires.id}}" size="60" maxlength="128" placeholder="questionnaireId" class="form-text required" required="required" aria-required="true" style="display:none">
+	</div>					
+	{{ content.addQuestionForm.actions.submit }}
+</form>
+
+<h3>{{'Pages'|trans}}:</h3>
+{% for page in content.pages %}
+  {{page.title}} : {{page.link}}
+	<form {{content.unassignPageForm.attributes }} method="post">
+		{{ content.unassignPageForm.form_build_id }}
+		{{ content.unassignPageForm.form_token }}
+		{{ content.unassignPageForm.form_id }}
+		{{ content.unassignPageForm.subject }}
+		{{ content.unassignPageForm.message }}
+		<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label" style="display:none">
+			<input data-drupal-selector="edit-id" type="text" id="edit-id--2" name="id" value="{{page.id}}" size="60" maxlength="128" placeholder="assignedPageId" class="form-text required" required="required" aria-required="true">
+		</div>
+		{{ content.unassignPageForm.actions.submit }}
+	</form>
+{% endfor %}
+
+<form {{content.assignPageForm.attributes }} method="post">
+	{{ content.assignPageForm.form_build_id }}
+	{{ content.assignPageForm.form_token }}
+	{{ content.assignPageForm.form_id }}
+	{{ content.assignPageForm.subject }}
+	{{ content.assignPageForm.message }}
+	{{ content.assignPageForm.title }}
+	{{ content.assignPageForm.link }}
+	<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-questionnaireid form-item-questionnaireid form-no-label" style="display:none">
+		<input data-drupal-selector="edit-questionnaireid" type="text" id="edit-questionnaireid--2" name="questionnaireId" value="{{content.questionnaires.id}}" size="60" maxlength="128" placeholder="questionnaireId" class="form-text required" required="required" aria-required="true">
+	</div>	
+	{{ content.assignPageForm.actions.submit }}
+</form>

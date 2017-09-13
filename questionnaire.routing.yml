@@ -1,0 +1,106 @@
+questionnaire.main:
+  path: '/questionnaire'
+  defaults:
+    _controller: '\Drupal\questionnaire\Controller\questionnaireController::main'
+    _title: 'Main'
+  requirements:
+    _role: 'authenticated'
+
+questionnaire.questionnaire:
+  path: '/questionnaire/{id}'
+  defaults:
+    _controller: '\Drupal\questionnaire\Controller\questionnaireController::questionnaire'
+    _title: ''
+  requirements:
+    _role: 'authenticated'
+
+questionnaire.question:
+  path: '/questionnaire/question/{id}'
+  defaults:
+    _controller: '\Drupal\questionnaire\Controller\questionnaireController::question'
+    _title: ''
+  requirements:
+    _role: 'authenticated'
+
+quiz.ajaxquestionnaire:
+  path: '/ajaxquestionnaire'
+  defaults:
+    _title: ''
+    _controller: '\Drupal\questionnaire\Controller\questionnaireController::ajaxQuestionnaire'
+  methods:  [POST]
+  requirements:
+    _permission: 'access content'
+
+quiz.ajaxquestionnairelinks:
+  path: '/ajaxquestionnairelinks'
+  defaults:
+    _title: ''
+    _controller: '\Drupal\questionnaire\Controller\questionnaireController::ajaxQuestionnaireLinks'
+  methods:  [POST]
+  requirements:
+    _permission: 'access content'
+
+# forms
+questionnaire.addquestionnaireform:
+  path: '/addquestionnaireform'
+  defaults:
+    _title: 'Add Questionnaire'
+    _form: '\Drupal\questionnaire\Form\addQuestionnaireForm'
+  requirements:
+    _role: 'authenticated'    
+
+questionnaire.deletequestionnaireform:
+  path: '/deletequestionnaireform'
+  defaults:
+    _title: 'Delete Questionnaire'
+    _form: '\Drupal\questionnaire\Form\deleteQuestionnaireForm'
+  requirements:
+    _role: 'authenticated'
+
+questionnaire.addquestionform:
+  path: '/addquestionform'
+  defaults:
+    _title: 'Add Question'
+    _form: '\Drupal\questionnaire\Form\addQuestionForm'
+  requirements:
+    _role: 'authenticated'   
+
+questionnaire.addanswerform:
+  path: '/addanswerform'
+  defaults:
+    _title: 'Add Answer'
+    _form: '\Drupal\questionnaire\Form\addAnswerForm'
+  requirements:
+    _role: 'authenticated'
+
+questionnaire.deleteanswerform:
+  path: '/deleteanswerform'
+  defaults:
+    _title: 'delete Answer'
+    _form: '\Drupal\questionnaire\Form\deleteAnswerForm'
+  requirements:
+    _role: 'authenticated'               
+
+questionnaire.deletequestionform:
+  path: '/deletequestionform'
+  defaults:
+    _title: 'delete question'
+    _form: '\Drupal\questionnaire\Form\deleteQuestionForm'
+  requirements:
+    _role: 'authenticated'     
+
+questionnaire.assignpageform:
+  path: '/assignpageform'
+  defaults:
+    _title: ''
+    _form: '\Drupal\questionnaire\Form\assignPageForm'
+  requirements:
+    _role: 'authenticated'  
+
+questionnaire.unassignpageform:
+  path: '/unassignpageform'
+  defaults:
+    _title: ''
+    _form: '\Drupal\questionnaire\Form\unassignPageForm'
+  requirements:
+    _role: 'authenticated'     
