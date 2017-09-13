@@ -40,6 +40,15 @@ quiz.ajaxquestionnairelinks:
   requirements:
     _permission: 'access content'
 
+quiz.ajaxaddresult:
+  path: '/ajaxaddresult'
+  defaults:
+    _title: ''
+    _controller: '\Drupal\questionnaire\Controller\questionnaireController::ajaxAddResult'
+  methods:  [POST]
+  requirements:
+    _permission: 'access content'    
+
 # forms
 questionnaire.addquestionnaireform:
   path: '/addquestionnaireform'

@@ -75,6 +75,7 @@ jQuery(document).ready(function($) {
 		$("#questionnaireForm").submit(function(e) {
 	    e.preventDefault();
 	    $('.modal').hide();
+			$.post("/ajaxaddresult", $("#questionnaireForm").serialize());
   	});
 	}
 	

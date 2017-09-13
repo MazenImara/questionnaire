@@ -66,4 +66,8 @@ class questionnaireController extends ControllerBase {
 		return new JsonResponse($links);
 	}
 
+	public function ajaxAddResult() {
+		return new JsonResponse([]);
+	}
+
 }// class
