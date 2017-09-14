@@ -49,15 +49,15 @@ class methods {
 
 	static public function addQuestion($question) {
 		\Drupal::database()->insert('questionnaire_question')
-		                   ->fields(['body', 'multichoice', 'questionnaireId'])
-		                   ->values([$question['body'], $question['multichoice'], $question['questionnaireId']])
+		                   ->fields(['body', 'multichoice', 'textAnswer', 'questionnaireId'])
+		                   ->values([$question['body'], $question['multichoice'], $question['textAnswer'], $question['questionnaireId']])
 		                   ->execute();
 	}
 
 	static public function getQuestions($questionnaireId) {
 		$questions = NULL;
 		$result    = \Drupal::database()->select('questionnaire_question', 'q')
-		                             ->fields('q', ['id', 'body', 'multichoice', 'questionnaireId'])
+		                             ->fields('q', ['id', 'body', 'textAnswer', 'multichoice', 'questionnaireId'])
 		                             ->condition('questionnaireId', [$questionnaireId])
 		                             ->execute();
 		$questions = [];
@@ -66,6 +66,7 @@ class methods {
 					'id'              => $row['id'],
 					'body'            => $row['body'],
 					'multichoice'     => $row['multichoice'],
+					'textAnswer'      => $row['textAnswer'],
 					'questionnaireId' => $row['questionnaireId'],
 				]);
 		}
@@ -75,7 +76,7 @@ class methods {
 	static public function getQuestionById($id) {
 		$question = NULL;
 		$result   = \Drupal::database()->select('questionnaire_question', 'q')
-		                             ->fields('q', ['id', 'body', 'multichoice', 'questionnaireId'])
+		                             ->fields('q', ['id', 'body', 'multichoice', 'textAnswer', 'questionnaireId'])
 		                             ->condition('id', [$id])
 		                             ->execute();
 		while ($row = $result->fetchAssoc()) {
@@ -83,6 +84,7 @@ class methods {
 				'id'              => $row['id'],
 				'body'            => $row['body'],
 				'multichoice'     => $row['multichoice'],
+				'textAnswer'      => $row['textAnswer'],
 				'questionnaireId' => $row['questionnaireId'],
 			];
 		}
@@ -138,6 +140,7 @@ class methods {
 					'id'              => $q['id'],
 					'body'            => $q['body'],
 					'multichoice'     => $q['multichoice'],
+					'textAnswer'      => $q['textAnswer'],
 					'questionnaireId' => $q['questionnaireId'],
 					'answers'         => self::getAnswers($q['id']),
 				]);
@@ -210,6 +213,36 @@ class methods {
 		return $page;
 	}
 
+	static public function getPages() {
+		$pages  = NULL;
+		$result = \Drupal::database()->select('questionnaire_page', 'q')
+		                             ->fields('q', ['id', 'title', 'link'])
+		                             ->execute();
+		$pages = [];
+		while ($row = $result->fetchAssoc()) {
+			array_push($pages, [
+					'id'    => $row['id'],
+					'title' => $row['title'],
+					'link'  => $row['link'],
+				]);
+		}
+		return $pages;
+	}
+	static public function getPageById($id) {
+		$page   = NULL;
+		$result = \Drupal::database()->select('questionnaire_page', 'q')
+		                             ->fields('q', ['id', 'title', 'link'])
+		                             ->condition('id', $id)
+		                             ->execute();
+		while ($row = $result->fetchAssoc()) {
+			$page = [
+				'id'    => $row['id'],
+				'title' => $row['title'],
+				'link'  => $row['link'],
+			];
+		}
+		return $page;
+	}
 	static public function getAssignedPageByLink($link) {
 		$page   = NULL;
 		$result = \Drupal::database()->select('questionnaire_questionnaire_page', 'q')
@@ -233,6 +266,143 @@ class methods {
 			                   ->values([$page['title'], $page['link']])
 			                   ->execute();
 		}
+	}
+
+	static public function saveResult($post) {
+		$answers = [];
+		foreach ($post as $a) {
+			if (explode(',', $a['name'])[0] != 'textArea') {
+				$text = explode(',', $a['value']);
+				array_push($answers, [
+						'link'     => $text[0],
+						'question' => $text[1],
+						'answer'   => $text[2],
+					]);
+			} else {
+				self::saveTextAnswer($a);
+			}
+		}
+
+		foreach ($answers as $a) {
+			$score = self::getScore($a);
+			if (!$score) {
+				\Drupal::database()->insert('questionnaire_result')
+				                   ->fields(['link', 'question', 'answer', 'score'])
+				                   ->values([$a['link'], $a['question'], $a['answer'], '1'])
+				                   ->execute();
+			} else {
+				$score++;
+				\Drupal::database()->update('questionnaire_result')
+				                   ->condition('link', [$a['link']])
+				                   ->condition('question', [$a['question']])
+				                   ->condition('answer', [$a['answer']])
+				                   ->fields(['score' => $score])
+					->execute();
+			}
+		}
+
+	}
+
+	static public function saveTextAnswer($answer) {
+		$a = explode(',', $answer['name']);
+		\Drupal::database()->insert('questionnaire_textAnswer')
+		                   ->fields(['link', 'question', 'answer'])
+		                   ->values([$a[1], $a[2], $answer['value']])
+		                   ->execute();
+	}
+
+	static public function getScore($a) {
+		$score  = NULL;
+		$result = \Drupal::database()->select('questionnaire_result', 'q')
+		                             ->fields('q', ['score'])
+		                             ->condition('link', $a['link'])
+		                             ->condition('question', $a['question'])
+		                             ->condition('answer', $a['answer'])
+		                             ->execute();
+		while ($row = $result->fetchAssoc()) {
+			$score = $row['score'];
+		}
+		return $score;
+	}
+
+	static public function getResult($link) {
+		$rows   = NULL;
+		$result = \Drupal::database()->select('questionnaire_result', 'q')
+		                             ->fields('q', ['id', 'link', 'question', 'answer', 'score'])
+		                             ->condition('link', $link)
+		                             ->execute();
+		$rows = [];
+		while ($row = $result->fetchAssoc()) {
+			array_push($rows, [
+					'id'       => $row['id'],
+					'link'     => $row['link'],
+					'question' => $row['question'],
+					'answer'   => $row['answer'],
+					'score'    => $row['score'],
+				]);
+		}
+		$questions = [];
+		foreach ($rows as $row) {
+			if (!in_array($row['question'], $questions)) {
+				array_push($questions, $row['question']);
+			}
+		}
+		$questionsArray = [];
+		foreach ($questions as $q) {
+			$result = \Drupal::database()->select('questionnaire_result', 'q')
+			                             ->fields('q', ['answer', 'score'])
+			                             ->condition('question', $q)
+			                             ->condition('link', $link)
+			                             ->execute();
+			$answers = [];
+			while ($row = $result->fetchAssoc()) {
+				array_push($answers, [
+						'answer' => $row['answer'],
+						'score'  => $row['score'],
+					]);
+			}
+
+			array_push($questionsArray, ['question' => $q, 'answers' => $answers]);
+		}
+		return $questionsArray;
+	}
+
+	static public function getTextResult($link) {
+		$rows   = NULL;
+		$result = \Drupal::database()->select('questionnaire_textAnswer', 'q')
+		                             ->fields('q', ['id', 'link', 'question', 'answer'])
+		                             ->condition('link', $link)
+		                             ->execute();
+		$rows = [];
+		while ($row = $result->fetchAssoc()) {
+			array_push($rows, [
+					'id'       => $row['id'],
+					'link'     => $row['link'],
+					'question' => $row['question'],
+					'answer'   => $row['answer'],
+				]);
+		}
+		$allQuestions = [];
+		foreach ($rows as $row) {
+			if (!in_array($row['question'], $allQuestions)) {
+				array_push($allQuestions, $row['question']);
+			}
+		}
+		$question = [];
+		foreach ($allQuestions as $q) {
+			$result = \Drupal::database()->select('questionnaire_textAnswer', 'q')
+			                             ->fields('q', ['answer'])
+			                             ->condition('question', $q)
+			                             ->condition('link', $link)
+			                             ->execute();
+			$answers = [];
+			while ($row = $result->fetchAssoc()) {
+				array_push($answers, $row['answer']);
+			}
+
+			array_push($question, ['question' => $q, 'answers' => $answers]);
+		}
+		return $question;
 	}
 
 }//class

@@ -1,0 +1,17 @@
+<h2>{{content.page.title}}</h2>
+
+{% for r in content.results %}
+    <br>{{r.question}}
+    {% for answer in r.answers %}
+        <br>{{answer.answer}} : {{answer.score}}
+    {% endfor %}
+{% endfor %}
+
+
+<h4>{{'Text Answer Questions'|trans}}</h4>
+{% for r in content.textResults %}
+    <br>{{r.question}}
+    {% for a in r.answers %}
+    	<br>{{a}}    
+    {% endfor %}
+{% endfor %}

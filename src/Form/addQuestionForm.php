@@ -28,6 +28,10 @@ class addQuestionForm extends FormBase {
 			'#type'  => 'checkbox',
 			'#title' => $this->t('Multichoice'),
 		);
+		$form['textAnswer'] = array(
+			'#type'  => 'checkbox',
+			'#title' => $this->t('Text Answer'),
+		);
 		$form['questionnaireId'] = array(
 			'#type'        => 'textfield',
 			'#placeholder' => t('questionnaireId'),

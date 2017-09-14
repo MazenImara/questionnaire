@@ -18,6 +18,7 @@ function questionnaire_schema() {
         'id' => ['type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE],
         'body' => ['type' => 'text', 'size' => 'medium' ,'not null' => FALSE],
         'multichoice' => ['type' => 'int', 'size' => 'tiny','not null' => TRUE],
+        'textAnswer' => ['type' => 'int', 'size' => 'tiny','not null' => TRUE],
         'questionnaireId' => [ 'type' => 'int','length' => 11,'not null' => TRUE],
       ],
       'primary key' => ['id'],
@@ -62,7 +63,7 @@ function questionnaire_schema() {
     $schema['questionnaire_result'] = [
       'fields' => [
         'id' => ['type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE],
-        'pageId' => [ 'type' => 'int','length' => 11,'not null' => TRUE],
+        'link' => ['type' => 'varchar','length' => 255,'not null' => TRUE],
         'question' => ['type' => 'varchar','length' => 255,'not null' => TRUE],
         'answer' => ['type' => 'varchar','length' => 255,'not null' => TRUE],
         'score' => [ 'type' => 'int','length' => 11,'not null' => TRUE],
@@ -70,6 +71,19 @@ function questionnaire_schema() {
       'primary key' => ['id'],
     ];    
   }
+
+  if (!db_table_exists('questionnaire_textAnswer')) {
+    $schema['questionnaire_textAnswer'] = [
+      'fields' => [
+        'id' => ['type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE],
+        'link' => ['type' => 'varchar','length' => 255,'not null' => TRUE],
+        'question' => ['type' => 'varchar','length' => 255,'not null' => TRUE],
+        'answer' => ['type' => 'varchar','length' => 255,'not null' => TRUE],
+      ],
+      'primary key' => ['id'],
+    ];    
+  }
+
   return $schema;
 }
 

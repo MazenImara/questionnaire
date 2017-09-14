@@ -1,7 +1,12 @@
 {{content.questionnaires.title}}
 
 {% for question in content.questions %}
-  <br><a href="/questionnaire/question/{{question.id}}">{{question.body}}</a> 
+	{% if question.textAnswer %}
+		<br>{{question.body}} ({{'Text Answer'|trans}})
+	{% else %}
+		<br><a href="/questionnaire/question/{{question.id}}">{{question.body}}</a>
+	{% endif %}
+   
 	<form {{content.deleteQuestionForm.attributes }} method="post">
 		{{ content.deleteQuestionForm.form_build_id }}
 		{{ content.deleteQuestionForm.form_token }}
@@ -24,6 +29,7 @@
 	{{ content.addQuestionForm.message }}
 	{{ content.addQuestionForm.body }}
 	{{ content.addQuestionForm.multichoice }}
+	{{ content.addQuestionForm.textAnswer }}
 	<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-questionnaireid form-item-questionnaireid form-no-label">
 	<input data-drupal-selector="edit-questionnaireid" type="text" id="edit-questionnaireid" name="questionnaireId" value="{{content.questionnaires.id}}" size="60" maxlength="128" placeholder="questionnaireId" class="form-text required" required="required" aria-required="true" style="display:none">
 	</div>					

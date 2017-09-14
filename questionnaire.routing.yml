@@ -22,6 +22,22 @@ questionnaire.question:
   requirements:
     _role: 'authenticated'
 
+questionnaire.resultpages:
+  path: '/questionnaire/pages'
+  defaults:
+    _controller: '\Drupal\questionnaire\Controller\questionnaireController::resultPages'
+    _title: ''
+  requirements:
+    _role: 'authenticated'  
+
+questionnaire.resultpage:
+  path: '/questionnaire/page/{id}'
+  defaults:
+    _controller: '\Drupal\questionnaire\Controller\questionnaireController::resultPage'
+    _title: ''
+  requirements:
+    _role: 'authenticated'       
+
 quiz.ajaxquestionnaire:
   path: '/ajaxquestionnaire'
   defaults:

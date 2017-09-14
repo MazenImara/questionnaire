@@ -15,7 +15,17 @@ function questionnaire_theme($existing, $type, $theme, $path) {
 	            				'variables' => [	                		
 	                											'content' => 'from hook module',
 	            												],
-	              			], 		              			             			         				  	
+	              			], 		              			             			         			
+	  				'result_pages' => [
+	            				'variables' => [	                		
+	                											'content' => 'from hook module',
+	            												],
+	              			], 		              			             			         			
+	  				'result_page' => [
+	            				'variables' => [	                		
+	                											'content' => 'from hook module',
+	            												],
+	              			],	              				  	
     			];//return
 }
 

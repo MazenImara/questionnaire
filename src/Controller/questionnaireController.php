@@ -53,6 +53,27 @@ class questionnaireController extends ControllerBase {
 		];
 	}
 
+	public function resultPages() {
+		return [
+			'#theme'   => 'result_pages',
+			'#content' => [
+				'pages'   => methods::getPages(),
+			],
+		];
+	}
+
+	public function resultPage($id) {
+		$page = methods::getPageById($id);
+		return [
+			'#theme'       => 'result_page',
+			'#content'     => [
+				'page'        => $page,
+				'results'     => methods::getResult($page['link']),
+				'textResults' => methods::getTextResult($page['link']),
+			],
+		];
+	}
+
 	public function ajaxQuestionnaire() {
 		$questionnaire = [];
 		$id            = $_POST['id'];
@@ -67,6 +88,7 @@ class questionnaireController extends ControllerBase {
 	}
 
 	public function ajaxAddResult() {
+		methods::saveResult($_POST['answers']);
 		return new JsonResponse([]);
 	}
 

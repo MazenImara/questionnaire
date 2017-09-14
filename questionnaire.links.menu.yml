@@ -3,3 +3,9 @@ questionnare.main:
   description: 'Main page'
   parent: system.admin
   url: internal:/questionnaire
+
+questionnare.Pages:
+  title: 'Questionnare Pages'
+  description: 'Results'
+  parent: questionnare.main
+  url: internal:/questionnaire/pages  

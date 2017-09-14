@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-
+	var url = window.location.pathname;
 // get question
 	$.post("/ajaxquestionnairelinks", function(data, status){	
 		  if (status) {
@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
 
 
 	function checkPage(links) {
-		var url = window.location.pathname;
+		
 		$.each(links, function( i, link ) {
 			if (url == link.link) {
 				getQuestionnaire(link.questionnaireId);
@@ -44,16 +44,21 @@ jQuery(document).ready(function($) {
 	function getQuestions(qs) {
 		questions = '';
 		$.each(qs, function( i, q ) {
-		  questions = questions + '<p>' + q.body + '</p>' + getAnswers(q.answers);
+			if (q.textAnswer == 1) {
+		  	questions = questions + '<p>' + q.body + '<textarea form ="questionnaireForm" name="textArea'+','+url+','+ q.body +'" style="width:100%;"></textarea>';
+			}
+			else{
+		  	questions = questions + '<p>' + q.body + '</p>' + getAnswers(q);
+			}
 		});		
 		 
 		return questions;
 	}
 
-	function getAnswers(as) {
+	function getAnswers(q) {
 		answers = '';
-		$.each(as, function( i, a ) {
-		  answers = answers + '<input type="radio" required name="'+ a.questionId +'" value="' + a.body + '"> ' + a.body + '<br>';
+		$.each(q.answers, function( i, a ) {
+		  answers = answers + '<input type="radio" required name="'+ q.id +'" value="' + url +','+ q.body +','+ a.body + '"> ' + a.body + '<br>';
 		});		
 		return answers;
 	}
@@ -75,18 +80,27 @@ jQuery(document).ready(function($) {
 		$("#questionnaireForm").submit(function(e) {
 	    e.preventDefault();
 	    $('.modal').hide();
-			$.post("/ajaxaddresult", $("#questionnaireForm").serialize());
+
+	    
+			$.post("/ajaxaddresult", {answers: $( this ).serializeArray()});
+
+			console.log( {answers: $( this ).serializeArray()} );
+			console.log( $( this ).serializeArray());	
+
+
   	});
 	}
 	
 
 
+if ($.cookie("sss")) {
+	alert($.cookie("questionnaire"))
+}
+
+//$.cookie("questionnaire", '/pear,/kontakt', { expires : 10 });
 
 
-
-
-
-
+//https://stackoverflow.com/questions/1458724/how-do-i-set-unset-cookie-with-jquery
 
 
 //for popup	
