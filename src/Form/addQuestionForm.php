@@ -18,31 +18,31 @@ class addQuestionForm extends FormBase {
 	 * {@inheritdoc}
 	 */
 	public function buildForm(array $form, FormStateInterface $form_state) {
-		$form['body'] = array(
+		$form['body'] = [
 			'#type'        => 'textarea',
 			'#placeholder' => t('Question?'),
 			'#required'    => TRUE,
 			'#resizable'   => TRUE,
-		);
-		$form['multichoice'] = array(
+		];
+		$form['multichoice'] = [
 			'#type'  => 'checkbox',
 			'#title' => $this->t('Multichoice'),
-		);
-		$form['textAnswer'] = array(
+		];
+		$form['textAnswer'] = [
 			'#type'  => 'checkbox',
 			'#title' => $this->t('Text Answer'),
-		);
-		$form['questionnaireId'] = array(
+		];
+		$form['questionnaireId'] = [
 			'#type'        => 'textfield',
 			'#placeholder' => t('questionnaireId'),
 			'#required'    => TRUE,
-		);
+		];
 		$form['actions']['#type']  = 'actions';
-		$form['actions']['submit'] = array(
+		$form['actions']['submit'] = [
 			'#type'        => 'submit',
 			'#value'       => $this->t('Create'),
 			'#button_type' => 'primary',
-		);
+		];
 		return $form;
 	}
 

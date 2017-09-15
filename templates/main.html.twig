@@ -4,6 +4,7 @@
     <tr>
       <th>#</th>
       <th>Title</th>
+      <th>Evrey # days</th>
       <th>Description</th>
       <th>del</th>
     </tr>
@@ -13,6 +14,7 @@
 	  <tr>
 	    <td>*</td>
 	    <td><a href="questionnaire/{{q.id}}">{{q.title}}</a></td>
+	    <td>{{q.days}}</td>
 	    <td>{{q.description}}</td>
 	    <td>
 				<form {{content.deleteForm.attributes }} method="post">

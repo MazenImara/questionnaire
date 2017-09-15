@@ -6,5 +6,6 @@ questionnaire_lib:
   js:
     js/main.js: {}
   dependencies:
-    - core/drupal.ajax
     - core/jquery
+    - core/drupal.ajax
+    - core/jquery.cookie

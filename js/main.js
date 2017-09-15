@@ -1,5 +1,7 @@
 jQuery(document).ready(function($) {
 	var url = window.location.pathname;
+	var questionnaireId = '';
+	var cookieLife = null;
 // get question
 	$.post("/ajaxquestionnairelinks", function(data, status){	
 		  if (status) {
@@ -7,31 +9,28 @@ jQuery(document).ready(function($) {
 		  }
 	});
 
-
 	function checkPage(links) {
 		
 		$.each(links, function( i, link ) {
 			if (url == link.link) {
-				getQuestionnaire(link.questionnaireId);
+				questionnaireId = link.questionnaireId;
+				if (isCookie(link.link)) {
+					getQuestionnaire(link.questionnaireId);
+				}				
+				console.log('iscookie'+isCookie(link.questionnaireId, link.link));
 			}
 		});
 	}
 
-
-
+	
 	function getQuestionnaire(id) {
 		$.post("/ajaxquestionnaire", {id: id}, function(data, status){	
 			if (status) {
 				showQuestionnaire(data);
+				cookieLife = parseInt(data.days);
 			}	  
 		});
 	}
-
-
-
-
-
-
 
 	function showQuestionnaire(qnaire) {
 		var part1 = '<div id="myModal" class="modal"><div class="modal-content"><form id="questionnaireForm" method="post"><div class="modal-header"><span class="close"><input type="submit" name="" value="X"></span><h4>' + qnaire.description + '</h4></div><div class="modal-body">';
@@ -62,50 +61,40 @@ jQuery(document).ready(function($) {
 		});		
 		return answers;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 	function submitQuestionnaire() {
 		$('.modal').show();
 		$("#questionnaireForm").submit(function(e) {
 	    e.preventDefault();
 	    $('.modal').hide();
-
-	    
 			$.post("/ajaxaddresult", {answers: $( this ).serializeArray()});
-
-			console.log( {answers: $( this ).serializeArray()} );
-			console.log( $( this ).serializeArray());	
-
-
+			setCookie();
   	});
 	}
-	
 
+	function isCookie(link) {
+		var is = true;
+		if (cookie = $.cookie('questionnaire'+questionnaireId)) { 
+			links = cookie.split(',');
+			if (jQuery.inArray(link, links)!='-1') {
+				is = false;
+			}
+			else {
+				is = true;
+			}
+		}
+		else {
+			$.cookie('questionnaire'+questionnaireId, '', { expires : 10 });
+			is = true;
+		}
+		return is;
+	}
 
-if ($.cookie("sss")) {
-	alert($.cookie("questionnaire"))
-}
-
-//$.cookie("questionnaire", '/pear,/kontakt', { expires : 10 });
-
-
-//https://stackoverflow.com/questions/1458724/how-do-i-set-unset-cookie-with-jquery
-
-
-//for popup	
-  
-
+	function setCookie() {		
+		links = $.cookie('questionnaire'+questionnaireId);
+		links = links +','+ url;
+		$.removeCookie('questionnaire'+questionnaireId);
+		$.cookie('questionnaire'+questionnaireId, links, { expires : cookieLife });
+	}
 
 // end popup
 });	//ready functuon

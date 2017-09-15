@@ -6,7 +6,7 @@ class methods {
 	static public function getQuetionnaires($id = NULL) {
 		$questionnaires = NULL;
 		$query          = \Drupal::database()->select('questionnaire', 'q')
-		                            ->fields('q', ['id', 'title', 'description']);
+		                            ->fields('q', ['id', 'title', 'description', 'days']);
 		if ($id) {
 			$result = $query->condition('id', [$id])->execute();
 			while ($row = $result->fetchAssoc()) {
@@ -14,6 +14,7 @@ class methods {
 					'id'          => $row['id'],
 					'title'       => $row['title'],
 					'description' => $row['description'],
+					'days'        => $row['days'],
 				];
 			}
 		} else {
@@ -24,6 +25,7 @@ class methods {
 						'id'          => $row['id'],
 						'title'       => $row['title'],
 						'description' => $row['description'],
+						'days'        => $row['days'],
 					]);
 			}
 		}
@@ -32,8 +34,8 @@ class methods {
 
 	static public function addQuestionnaire($questionnaire) {
 		\Drupal::database()->insert('questionnaire')
-		                   ->fields(['title', 'description'])
-		                   ->values([$questionnaire['title'], $questionnaire['description']])
+		                   ->fields(['title', 'description', 'days'])
+		                   ->values([$questionnaire['title'], $questionnaire['description'], $questionnaire['days']])
 		                   ->execute();
 	}
 
@@ -149,6 +151,7 @@ class methods {
 			'id'          => $qnaire['id'],
 			'title'       => $qnaire['title'],
 			'description' => $qnaire['description'],
+			'days'        => $qnaire['days'],
 			'questions'   => $questions,
 		];
 		return $questionnaire;

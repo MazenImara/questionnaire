@@ -6,7 +6,8 @@ function questionnaire_schema() {
       'fields' => [
         'id' => ['type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE],
         'title' => ['type' => 'varchar','length' => 255,'not null' => TRUE],
-        'description' => ['type' => 'text', 'size' => 'medium' ,'not null' => FALSE],        
+        'description' => ['type' => 'text', 'size' => 'medium' ,'not null' => FALSE],
+        'days' => [ 'type' => 'int','length' => 11,'not null' => TRUE]        
       ],
       'primary key' => ['id'],
     ];    

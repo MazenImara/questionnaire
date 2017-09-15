@@ -28,6 +28,12 @@ class addQuestionnaireForm extends FormBase {
 			'#placeholder' => t('Title'),
 			'#required'    => TRUE,
 		];
+		$form['days'] = [
+			'#type'          => 'textfield',
+			'#required'      => TRUE,
+			'#default_value' => '30',
+			'#description'   => 'Every ^ days',
+		];
 		$form['description'] = [
 			'#type'        => 'textarea',
 			'#placeholder' => t('Questionnaire Description'),
