@@ -1,17 +1,52 @@
-<h2>{{content.page.title}}</h2>
+<h2>{{content.page.title}} ( {{content.page.link}} )</h2>
 
 {% for r in content.results %}
     <br>{{r.question}}
-    {% for answer in r.answers %}
-        <br>{{answer.answer}} : {{answer.score}}
+		<form {{content.deleteResultQuestionForm.attributes }} method="post">
+			{{ content.deleteResultQuestionForm.form_build_id }}
+			{{ content.deleteResultQuestionForm.form_token }}
+			{{ content.deleteResultQuestionForm.form_id }}
+			{{ content.deleteResultQuestionForm.subject }}
+			{{ content.deleteResultQuestionForm.message }}
+			<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-question form-item-question form-no-label" style="display:none">
+			<input data-drupal-selector="edit-question" type="text" id="edit-question" name="question" value="{{r.question}}" size="60" maxlength="128" placeholder="question" class="form-text required" required="required" aria-required="true">
+			</div>
+			<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-link form-item-link form-no-label" style="display:none">
+				<input data-drupal-selector="edit-link" type="text" id="edit-link" name="link" value="{{content.page.link}}" size="60" maxlength="128" placeholder="länk" class="form-text required" required="required" aria-required="true">
+			</div>			
+			{{ content.deleteResultQuestionForm.actions.submit }}
+		</form>
+		{% set scoreSum = 0 %}	
+    {% for a in r.answers %}
+        {% set scoreSum = scoreSum + a.score %}
     {% endfor %}
+    {{'All user answers'|trans}}: {{scoreSum}}
+    {% for answer in r.answers %}
+    	{% set scorePercent = answer.score * 100 / scoreSum %}
+       <br>{{answer.answer}} : {{"%02d"|format(scorePercent)}}%
+    {% endfor %}
+
 {% endfor %}
 
 
 <h4>{{'Text Answer Questions'|trans}}</h4>
 {% for r in content.textResults %}
     <br>{{r.question}}
+		<form {{content.deleteTextResultQuestionForm.attributes }} method="post">
+			{{ content.deleteTextResultQuestionForm.form_build_id }}
+			{{ content.deleteTextResultQuestionForm.form_token }}
+			{{ content.deleteTextResultQuestionForm.form_id }}
+			{{ content.deleteTextResultQuestionForm.subject }}
+			{{ content.deleteTextResultQuestionForm.message }}
+			<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-question form-item-question form-no-label" style="display:none">
+				<input data-drupal-selector="edit-question" type="text" id="edit-question--2" name="question" value="{{r.question}}" size="60" maxlength="128" placeholder="question" class="form-text required" required="required" aria-required="true">
+			</div>	
+			<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-link form-item-link form-no-label" style="display:none">
+				<input data-drupal-selector="edit-link" type="text" id="edit-link--2" name="link" value="{{content.page.link}}" size="60" maxlength="128" placeholder="länk" class="form-text required" required="required" aria-required="true">
+			</div>							
+			{{ content.deleteTextResultQuestionForm.actions.submit }}
+		</form>	    
     {% for a in r.answers %}
-    	<br>{{a}}    
+    	<br>{{r.id}}{{a}}    
     {% endfor %}
 {% endfor %}

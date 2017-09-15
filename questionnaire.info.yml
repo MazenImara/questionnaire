@@ -3,5 +3,5 @@ description: 'Custom module for ask user'
 type: module
 package: Storleden
 core: 8.x
-#interface translation project: Questionnaire
-#interface translation server pattern: modules/custom/questionnaire/translations/%language.po
+interface translation project: questionnaire
+interface translation server pattern: modules/questionnaire/translations/%language.po

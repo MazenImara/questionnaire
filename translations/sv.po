@@ -1,0 +1,17 @@
+msgid "Text Answer"
+msgstr "Textsvar"
+
+msgid "All user answers"
+msgstr "Alla användare svarar"
+
+msgid "Text Answer Questions"
+msgstr "Textsvar Frågor"
+
+msgid "Pages with visitor questions"
+msgstr "Sidor med besökar frågor"
+
+msgid "Pages"
+msgstr "Sidor"
+
+msgid ""
+msgstr ""

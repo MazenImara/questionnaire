@@ -1,3 +1,16 @@
+<h2>{{'Pages with visitor questions'|trans}}:</h2>
+
 {% for page in content.pages %}
-    <br><a href="/questionnaire/page/{{page.id}}">{{page.title}}</a>
+   <br>{{page.title}} ({{page.link}}):<a href="/questionnaire/page/{{page.id}}">{{'Statistics'|trans}}</a>
+	<form {{content.deletePageForm.attributes }} method="post">
+		{{ content.deletePageForm.form_build_id }}
+		{{ content.deletePageForm.form_token }}
+		{{ content.deletePageForm.form_id }}
+		{{ content.deletePageForm.subject }}
+		{{ content.deletePageForm.message }}
+		<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label" style="display:none">
+			<input data-drupal-selector="edit-id" type="text" id="edit-id" name="id" value="{{page.id}}" size="60" maxlength="128" placeholder="PageId" class="form-text required" required="required" aria-required="true">
+		</div>		
+		{{ content.deletePageForm.actions.submit }}
+	</form>    
 {% endfor %}

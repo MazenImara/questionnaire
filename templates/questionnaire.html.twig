@@ -1,4 +1,31 @@
-{{content.questionnaires.title}}
+
+<form {{content.editQuestionnaireForm.attributes }} method="post">
+	{{ content.editQuestionnaireForm.form_build_id }}
+	{{ content.editQuestionnaireForm.form_token }}
+	{{ content.editQuestionnaireForm.form_id }}
+	{{ content.editQuestionnaireForm.subject }}
+	{{ content.editQuestionnaireForm.message }}
+	<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label" style="display:none">
+		<input data-drupal-selector="edit-id" type="text" id="edit-id--3" name="id" value="{{content.questionnaires.id}}" size="60" maxlength="128" placeholder="id" class="form-text required" required="required" aria-required="true">
+	</div>
+	<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-title form-item-title form-no-label">
+		<input data-drupal-selector="edit-title" type="text" id="edit-title--2" name="title" value="{{content.questionnaires.title}}" size="60" maxlength="128" placeholder="Titel" class="form-text required" required="required" aria-required="true">
+	</div>
+	<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-days form-item-days form-no-label">
+		<input data-drupal-selector="edit-days" aria-describedby="edit-days--description" type="text" id="edit-days" name="days" value="{{content.questionnaires.days}}" size="60" maxlength="128" class="form-text required" required="required" aria-required="true">
+		<div id="edit-days--description" class="description">
+		  Every ^ days
+		</div>
+	</div>	
+	<div class="js-form-item form-item js-form-type-textarea form-type-textarea js-form-item-description form-item-description form-no-label">
+		<div class="form-textarea-wrapper">
+		  <textarea data-drupal-selector="edit-description" id="edit-description" name="description" rows="5" cols="60" placeholder="Questionnaire Description" class="form-textarea resize-1">{{content.questionnaires.description}}</textarea>
+		</div>
+	</div>					
+	{{ content.editQuestionnaireForm.actions.submit }}
+</form>
+
+
 
 {% for question in content.questions %}
 	{% if question.textAnswer %}
@@ -28,7 +55,7 @@
 	{{ content.addQuestionForm.subject }}
 	{{ content.addQuestionForm.message }}
 	{{ content.addQuestionForm.body }}
-	{{ content.addQuestionForm.multichoice }}
+	{#{ content.addQuestionForm.multichoice }#}
 	{{ content.addQuestionForm.textAnswer }}
 	<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-questionnaireid form-item-questionnaireid form-no-label">
 	<input data-drupal-selector="edit-questionnaireid" type="text" id="edit-questionnaireid" name="questionnaireId" value="{{content.questionnaires.id}}" size="60" maxlength="128" placeholder="questionnaireId" class="form-text required" required="required" aria-required="true" style="display:none">

@@ -28,15 +28,16 @@ class questionnaireController extends ControllerBase {
 	}
 	public function questionnaire($id) {
 		return [
-			'#theme'              => 'questionnaire',
-			'#content'            => [
-				'questionnaires'     => methods::getQuetionnaires($id),
-				'questions'          => methods::getQuestions($id),
-				'pages'              => methods::getAssignedPages($id),
-				'addQuestionForm'    => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\addQuestionForm'),
-				'deleteQuestionForm' => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\deleteQuestionForm'),
-				'assignPageForm'     => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\assignPageForm'),
-				'unassignPageForm'   => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\unassignPageForm'),
+			'#theme'                 => 'questionnaire',
+			'#content'               => [
+				'questionnaires'        => methods::getQuetionnaires($id),
+				'questions'             => methods::getQuestions($id),
+				'pages'                 => methods::getAssignedPages($id),
+				'addQuestionForm'       => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\addQuestionForm'),
+				'deleteQuestionForm'    => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\deleteQuestionForm'),
+				'assignPageForm'        => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\assignPageForm'),
+				'unassignPageForm'      => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\unassignPageForm'),
+				'editQuestionnaireForm' => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\editQuestionnaireForm'),
 			],
 		];
 	}
@@ -55,9 +56,10 @@ class questionnaireController extends ControllerBase {
 
 	public function resultPages() {
 		return [
-			'#theme'   => 'result_pages',
-			'#content' => [
-				'pages'   => methods::getPages(),
+			'#theme'          => 'result_pages',
+			'#content'        => [
+				'pages'          => methods::getPages(),
+				'deletePageForm' => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\deletePageForm'),
 			],
 		];
 	}
@@ -70,6 +72,8 @@ class questionnaireController extends ControllerBase {
 				'page'        => $page,
 				'results'     => methods::getResult($page['link']),
 				'textResults' => methods::getTextResult($page['link']),
+				'deleteResultQuestionForm' => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\deleteResultQuestionForm'),
+				'deleteTextResultQuestionForm' => \Drupal::formBuilder()->getForm('Drupal\questionnaire\Form\deleteTextResultQuestionForm'),
 			],
 		];
 	}

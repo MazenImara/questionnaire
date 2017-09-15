@@ -38,7 +38,12 @@ class methods {
 		                   ->values([$questionnaire['title'], $questionnaire['description'], $questionnaire['days']])
 		                   ->execute();
 	}
-
+	static public function editQuestionnaire($questionnaire) {
+		\Drupal::database()->update('questionnaire')
+		                   ->condition('id', [$questionnaire['id']])
+		                   ->fields(['title' => $questionnaire['title'], 'description' => $questionnaire['description'], 'days' => $questionnaire['days']])
+			->execute();
+	}
 	static public function deleteQuestionnaire($id) {
 		$questions = self::getQuestions($id);
 		foreach ($questions as $question) {
@@ -50,10 +55,36 @@ class methods {
 	}
 
 	static public function addQuestion($question) {
-		\Drupal::database()->insert('questionnaire_question')
-		                   ->fields(['body', 'multichoice', 'textAnswer', 'questionnaireId'])
-		                   ->values([$question['body'], $question['multichoice'], $question['textAnswer'], $question['questionnaireId']])
-		                   ->execute();
+		$RQuestion = 0;
+		$TQuestion = 0;
+		foreach (self::getQuestions($question['questionnaireId']) as $q) {
+			if ($q['textAnswer']) {
+				$TQuestion++;
+			} else {
+				$RQuestion++;
+			}
+		}
+		if ($question['textAnswer']) {
+			if ($TQuestion < 1) {
+				\Drupal::database()->insert('questionnaire_question')
+			                   ->fields(['body', 'multichoice', 'textAnswer', 'questionnaireId'])
+			                   ->values([$question['body'], $question['multichoice'], $question['textAnswer'], $question['questionnaireId']])
+			                   ->execute();
+			} else {
+				drupal_set_message(t('You can not add more than one text answer question, delete the old and add new one'), 'error');
+			}
+			
+		}
+		else {
+			if ($RQuestion < 4) {
+				\Drupal::database()->insert('questionnaire_question')
+			                   ->fields(['body', 'multichoice', 'textAnswer', 'questionnaireId'])
+			                   ->values([$question['body'], $question['multichoice'], $question['textAnswer'], $question['questionnaireId']])
+			                   ->execute();
+			} else {
+				drupal_set_message(t('You can not add more than four Radio answer question, delete the old and add new one'), 'error');
+			}			
+		}
 	}
 
 	static public function getQuestions($questionnaireId) {
@@ -174,7 +205,11 @@ class methods {
 		                   ->condition('id', [$id])
 		                   ->execute();
 	}
-
+	static public function deletePage($id) {
+		\Drupal::database()->delete('questionnaire_page', [])
+		                   ->condition('id', [$id])
+		                   ->execute();
+	}
 	static public function getAssignedPages($questionnaireId = NULL) {
 		$pages = NULL;
 		$query = \Drupal::database()->select('questionnaire_questionnaire_page', 'q')
@@ -307,11 +342,13 @@ class methods {
 	}
 
 	static public function saveTextAnswer($answer) {
-		$a = explode(',', $answer['name']);
-		\Drupal::database()->insert('questionnaire_textAnswer')
-		                   ->fields(['link', 'question', 'answer'])
-		                   ->values([$a[1], $a[2], $answer['value']])
-		                   ->execute();
+		if ($answer['value'] != '') {
+			$a = explode(',', $answer['name']);
+			\Drupal::database()->insert('questionnaire_textAnswer')
+			                   ->fields(['link', 'question', 'answer'])
+			                   ->values([$a[1], $a[2], $answer['value']])
+			                   ->execute();
+		}
 	}
 
 	static public function getScore($a) {
@@ -408,4 +445,18 @@ class methods {
 		return $question;
 	}
 
+	static public function deleteResultQuestion($question)
+	{
+		\Drupal::database()->delete('questionnaire_result', [])
+		                   ->condition('question', $question['question'])
+		                   ->condition('link', $question['link'])
+		                   ->execute();
+	}	
+	static public function deleteTextResultQuestion($question)
+	{
+		\Drupal::database()->delete('questionnaire_textAnswer', [])
+		                   ->condition('question', $question['question'])
+		                   ->condition('link', $question['link'])
+		                   ->execute();
+	}
 }//class

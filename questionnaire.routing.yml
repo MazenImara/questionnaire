@@ -72,7 +72,15 @@ questionnaire.addquestionnaireform:
     _title: 'Add Questionnaire'
     _form: '\Drupal\questionnaire\Form\addQuestionnaireForm'
   requirements:
-    _role: 'authenticated'    
+    _role: 'authenticated'
+
+questionnaire.editquestionnaireform:
+  path: '/editquestionnaireform'
+  defaults:
+    _title: 'edit Questionnaire'
+    _form: '\Drupal\questionnaire\Form\editQuestionnaireForm'
+  requirements:
+    _role: 'authenticated'         
 
 questionnaire.deletequestionnaireform:
   path: '/deletequestionnaireform'
@@ -127,5 +135,29 @@ questionnaire.unassignpageform:
   defaults:
     _title: ''
     _form: '\Drupal\questionnaire\Form\unassignPageForm'
+  requirements:
+    _role: 'authenticated'
+
+questionnaire.deletepageform:
+  path: '/deletepageform'
+  defaults:
+    _title: ''
+    _form: '\Drupal\questionnaire\Form\deletePageForm'
+  requirements:
+    _role: 'authenticated' 
+
+questionnaire.deleteresultquestionform:
+  path: '/deleteresultquestionform'
+  defaults:
+    _title: 'delete question'
+    _form: '\Drupal\questionnaire\Form\deleteResultQuestionForm'
+  requirements:
+    _role: 'authenticated'             
+
+questionnaire.deletetextresultquestionform:
+  path: '/deletetextresultquestionform'
+  defaults:
+    _title: ''
+    _form: '\Drupal\questionnaire\Form\deleteTextResultQuestionForm'
   requirements:
     _role: 'authenticated'     
