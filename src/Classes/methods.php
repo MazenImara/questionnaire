@@ -344,7 +344,7 @@ class methods {
 	static public function saveTextAnswer($answer) {
 		if ($answer['value'] != '') {
 			$a = explode(',', $answer['name']);
-			\Drupal::database()->insert('questionnaire_textAnswer')
+			\Drupal::database()->insert('questionnaire_textanswer')
 			                   ->fields(['link', 'question', 'answer'])
 			                   ->values([$a[1], $a[2], $answer['value']])
 			                   ->execute();
@@ -409,7 +409,7 @@ class methods {
 
 	static public function getTextResult($link) {
 		$rows   = NULL;
-		$result = \Drupal::database()->select('questionnaire_textAnswer', 'q')
+		$result = \Drupal::database()->select('questionnaire_textanswer', 'q')
 		                             ->fields('q', ['id', 'link', 'question', 'answer'])
 		                             ->condition('link', $link)
 		                             ->execute();
@@ -430,7 +430,7 @@ class methods {
 		}
 		$question = [];
 		foreach ($allQuestions as $q) {
-			$result = \Drupal::database()->select('questionnaire_textAnswer', 'q')
+			$result = \Drupal::database()->select('questionnaire_textanswer', 'q')
 			                             ->fields('q', ['answer'])
 			                             ->condition('question', $q)
 			                             ->condition('link', $link)
@@ -454,7 +454,7 @@ class methods {
 	}	
 	static public function deleteTextResultQuestion($question)
 	{
-		\Drupal::database()->delete('questionnaire_textAnswer', [])
+		\Drupal::database()->delete('questionnaire_textanswer', [])
 		                   ->condition('question', $question['question'])
 		                   ->condition('link', $question['link'])
 		                   ->execute();

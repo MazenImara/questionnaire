@@ -73,8 +73,8 @@ function questionnaire_schema() {
     ];    
   }
 
-  if (!db_table_exists('questionnaire_textAnswer')) {
-    $schema['questionnaire_textAnswer'] = [
+  if (!db_table_exists('questionnaire_textanswer')) {
+    $schema['questionnaire_textanswer'] = [
       'fields' => [
         'id' => ['type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE],
         'link' => ['type' => 'varchar','length' => 255,'not null' => TRUE],
