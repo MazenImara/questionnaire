@@ -4,8 +4,9 @@ questionnaire_lib:
     layout:
       css/questionnaire.css: {}
   js:
-    js/main.js: {}
+    js/questionnaire.js: {}
   dependencies:
     - core/jquery
     - core/drupal.ajax
     - core/jquery.cookie
+    - core/jquery.once

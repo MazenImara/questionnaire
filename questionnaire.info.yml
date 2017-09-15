@@ -4,4 +4,4 @@ type: module
 package: Storleden
 core: 8.x
 interface translation project: questionnaire
-interface translation server pattern: modules/questionnaire/translations/%language.po
+interface translation server pattern: modules/custom/questionnaire/translations/%language.po

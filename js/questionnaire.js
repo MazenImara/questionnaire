@@ -21,7 +21,6 @@ jQuery(document).ready(function($) {
 			}
 		});
 	}
-
 	
 	function getQuestionnaire(id) {
 		$.post("/ajaxquestionnaire", {id: id}, function(data, status){	
@@ -96,5 +95,5 @@ jQuery(document).ready(function($) {
 		$.cookie('questionnaire'+questionnaireId, links, { expires : cookieLife });
 	}
 
-// end popup
+
 });	//ready functuon
