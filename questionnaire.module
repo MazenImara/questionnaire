@@ -31,5 +31,8 @@ function questionnaire_theme($existing, $type, $theme, $path) {
 
 function questionnaire_page_attachments_alter(array &$page) {
   // Attach the flot asset on every page.
-  $page['#attached']['library'][] = 'questionnaire/questionnaire_lib';
+    if (\Drupal::currentUser()->isAnonymous()) {
+        $page['#attached']['library'][] = 'questionnaire/questionnaire_lib';
+    }
+
 }
