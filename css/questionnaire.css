@@ -1,101 +1,139 @@
 /* The Modal (background) */
+/* line 2, ../sass/questionnaire.scss */
 #myModal {
-    z-index:1000;
+  z-index: 1000;
 }
+
+/* line 5, ../sass/questionnaire.scss */
 h4 {
-    font-family: NoyhHeavy,sans-serif;
-    font-size: 1.2em!important;
+  font-family: NoyhHeavy,sans-serif;
+  font-size: 1.2em !important;
 }
+
+/* line 9, ../sass/questionnaire.scss */
 button {
-    color: #fff;
-    background: transparent;
-    border: none;
+  color: #fff;
+  background: transparent;
+  border: none;
 }
+
+/* line 14, ../sass/questionnaire.scss */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 0px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 0px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 /* Modal Content */
+/* line 29, ../sass/questionnaire.scss */
 .modal-content {
-    position: relative;
-    background-color: #fefefe;
-//margin: auto;
-    float: right;
-    padding: 0;
-    border: 1px solid #888;
-    width: 20%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
+  position: relative;
+  background-color: #fefefe;
+  float: right;
+  padding: 0;
+  border: 1px solid #888;
+  width: 20%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
 }
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
-
 @keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
-
 /* The Close Button */
+/* line 56, ../sass/questionnaire.scss */
 .close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
+/* line 63, ../sass/questionnaire.scss */
 .close:hover,
 .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 
+/* line 70, ../sass/questionnaire.scss */
 .modal-header {
-    padding: 2px 16px;
-    background-color: #000;
-    color: white;
+  padding: 2px 16px;
+  background-color: #000;
+  color: white;
 }
 
+/* line 76, ../sass/questionnaire.scss */
 .modal-body {
-    padding: 2px 16px;
+  padding: 2px 16px;
 }
 
+/* line 80, ../sass/questionnaire.scss */
 .modal-body p {
-    font-family: NoyhBook,sans-serif;
-    font-size: 1.2em;
-}
-.modal-body input {
-    font-family: NoyhBook,sans-serif;
-    font-size: 1.2em;
-}
-.modal-body input[type="submit"] {
-    background: #000;
-    color: #fff;
-    border: none;
-}
-.modal-body input[type="radio"] {
-    margin-right: 10px;
+  font-family: NoyhBook,sans-serif;
+  font-size: 1.2em;
 }
 
+/* line 84, ../sass/questionnaire.scss */
+.modal-body input {
+  font-family: NoyhBook,sans-serif;
+  font-size: 1.2em;
+}
+
+/* line 88, ../sass/questionnaire.scss */
+.modal-body input[type="submit"] {
+  background: #000;
+  color: #fff;
+  border: none;
+}
+
+/* line 93, ../sass/questionnaire.scss */
+.modal-body input[type="radio"] {
+  margin-right: 10px;
+}
+
+/* line 97, ../sass/questionnaire.scss */
 .modal-footer {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
 }
