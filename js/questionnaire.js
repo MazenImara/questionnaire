@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-  var url = window.location.pathname;
+  var url = decodeURIComponent(window.location.pathname);
   var questionnaireId = '';
   var cookieLife = null;
 // get question
@@ -17,7 +17,6 @@ jQuery(document).ready(function($) {
         if (isCookie(link.link)) {
           getQuestionnaire(link.questionnaireId);
         }
-        console.log('iscookie'+isCookie(link.questionnaireId, link.link));
       }
     });
   }
