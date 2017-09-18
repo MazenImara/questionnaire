@@ -1,4 +1,16 @@
 /* The Modal (background) */
+#myModal {
+    z-index:1000;
+}
+h4 {
+    font-family: NoyhHeavy,sans-serif;
+    font-size: 1.2em!important;
+}
+button {
+    color: #fff;
+    background: transparent;
+    border: none;
+}
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -17,7 +29,7 @@
 .modal-content {
     position: relative;
     background-color: #fefefe;
-    //margin: auto;
+//margin: auto;
     float: right;
     padding: 0;
     border: 1px solid #888;
@@ -31,7 +43,7 @@
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
+    from {top:-300px; opacity:0}
     to {top:0; opacity:1}
 }
 
@@ -57,11 +69,30 @@
 
 .modal-header {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: #000;
     color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {
+    padding: 2px 16px;
+}
+
+.modal-body p {
+    font-family: NoyhBook,sans-serif;
+    font-size: 1.2em;
+}
+.modal-body input {
+    font-family: NoyhBook,sans-serif;
+    font-size: 1.2em;
+}
+.modal-body input[type="submit"] {
+    background: #000;
+    color: #fff;
+    border: none;
+}
+.modal-body input[type="radio"] {
+    margin-right: 10px;
+}
 
 .modal-footer {
     padding: 2px 16px;
