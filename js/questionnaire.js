@@ -1,8 +1,12 @@
-jQuery(document).ready(function($) {
+(function ($) {
+  'use strict';
+  Drupal.behaviors.questionnaire = {
+    attach: function(context, settings) {
+      // start function
 	var url = window.location.pathname;
 	var questionnaireId = '';
 	var cookieLife = null;
-// get question
+    // get question
 	$.post("/ajaxquestionnairelinks", function(data, status){	
 		  if (status) {
 		  	checkPage(data);
@@ -40,7 +44,7 @@ jQuery(document).ready(function($) {
 	}
 
 	function getQuestions(qs) {
-		questions = '';
+		var questions = '';
 		$.each(qs, function( i, q ) {
 			if (q.textAnswer == 1) {
 		  	questions = questions + '<p>' + q.body + '<textarea form ="questionnaireForm" name="textArea'+','+url+','+ q.body +'" style="width:100%;"></textarea>';
@@ -54,7 +58,7 @@ jQuery(document).ready(function($) {
 	}
 
 	function getAnswers(q) {
-		answers = '';
+		var answers = '';
 		$.each(q.answers, function( i, a ) {
 		  answers = answers + '<input type="radio" required name="'+ q.id +'" value="' + url +','+ q.body +','+ a.body + '"> ' + a.body + '<br>';
 		});		
@@ -72,9 +76,10 @@ jQuery(document).ready(function($) {
 
 	function isCookie(link) {
 		var is = true;
-		if (cookie = $.cookie('questionnaire'+questionnaireId)) { 
-			links = cookie.split(',');
-			if (jQuery.inArray(link, links)!='-1') {
+		var cookie;
+		if (cookie = $.cookie('questionnaire'+questionnaireId)) {
+			var links = cookie.split(',');
+			if ($.inArray(link, links)!='-1') {
 				is = false;
 			}
 			else {
@@ -89,11 +94,13 @@ jQuery(document).ready(function($) {
 	}
 
 	function setCookie() {		
-		links = $.cookie('questionnaire'+questionnaireId);
+		var links = $.cookie('questionnaire'+questionnaireId);
 		links = links +','+ url;
 		$.removeCookie('questionnaire'+questionnaireId);
 		$.cookie('questionnaire'+questionnaireId, links, { expires : cookieLife });
 	}
 
 
-});	//ready functuon
+    }
+  };
+}(jQuery));	//ready functuon
