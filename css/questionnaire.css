@@ -1,23 +1,28 @@
+/* line 1, ../sass/questionnaire.scss */
+.questionnaire {
+  margin-left: 15px;
+}
+
 /* The Modal (background) */
-/* line 2, ../sass/questionnaire.scss */
+/* line 6, ../sass/questionnaire.scss */
 #myModal {
   z-index: 1000;
 }
 
-/* line 5, ../sass/questionnaire.scss */
+/* line 9, ../sass/questionnaire.scss */
 h4 {
   font-family: NoyhHeavy,sans-serif;
   font-size: 1.2em !important;
 }
 
-/* line 9, ../sass/questionnaire.scss */
+/* line 13, ../sass/questionnaire.scss */
 button {
   color: #fff;
   background: transparent;
   border: none;
 }
 
-/* line 14, ../sass/questionnaire.scss */
+/* line 18, ../sass/questionnaire.scss */
 .modal {
   display: none;
   /* Hidden by default */
@@ -42,7 +47,7 @@ button {
 }
 
 /* Modal Content */
-/* line 29, ../sass/questionnaire.scss */
+/* line 33, ../sass/questionnaire.scss */
 .modal-content {
   position: relative;
   background-color: #fefefe;
@@ -79,7 +84,7 @@ button {
   }
 }
 /* The Close Button */
-/* line 56, ../sass/questionnaire.scss */
+/* line 60, ../sass/questionnaire.scss */
 .close {
   color: white;
   float: right;
@@ -87,7 +92,7 @@ button {
   font-weight: bold;
 }
 
-/* line 63, ../sass/questionnaire.scss */
+/* line 67, ../sass/questionnaire.scss */
 .close:hover,
 .close:focus {
   color: #000;
@@ -95,43 +100,43 @@ button {
   cursor: pointer;
 }
 
-/* line 70, ../sass/questionnaire.scss */
+/* line 74, ../sass/questionnaire.scss */
 .modal-header {
   padding: 2px 16px;
   background-color: #000;
   color: white;
 }
 
-/* line 76, ../sass/questionnaire.scss */
+/* line 80, ../sass/questionnaire.scss */
 .modal-body {
   padding: 2px 16px;
 }
 
-/* line 80, ../sass/questionnaire.scss */
+/* line 84, ../sass/questionnaire.scss */
 .modal-body p {
   font-family: NoyhBook,sans-serif;
   font-size: 1.2em;
 }
 
-/* line 84, ../sass/questionnaire.scss */
+/* line 88, ../sass/questionnaire.scss */
 .modal-body input {
   font-family: NoyhBook,sans-serif;
   font-size: 1.2em;
 }
 
-/* line 88, ../sass/questionnaire.scss */
+/* line 92, ../sass/questionnaire.scss */
 .modal-body input[type="submit"] {
   background: #000;
   color: #fff;
   border: none;
 }
 
-/* line 93, ../sass/questionnaire.scss */
+/* line 97, ../sass/questionnaire.scss */
 .modal-body input[type="radio"] {
   margin-right: 10px;
 }
 
-/* line 97, ../sass/questionnaire.scss */
+/* line 101, ../sass/questionnaire.scss */
 .modal-footer {
   padding: 2px 16px;
   background-color: #5cb85c;

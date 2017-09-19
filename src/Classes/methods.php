@@ -206,6 +206,13 @@ class methods {
 		                   ->execute();
 	}
 	static public function deletePage($id) {
+	  $link = self::getPageById($id)['link'];
+    \Drupal::database()->delete('questionnaire_textanswer', [])
+      ->condition('link', $link)
+      ->execute();
+    \Drupal::database()->delete('questionnaire_result', [])
+      ->condition('link', $link)
+      ->execute();
 		\Drupal::database()->delete('questionnaire_page', [])
 		                   ->condition('id', [$id])
 		                   ->execute();

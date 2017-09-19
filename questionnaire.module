@@ -1,38 +1,38 @@
 <?php
 function questionnaire_theme($existing, $type, $theme, $path) {
-	return [	  	
-	  				'main' => [
-	            				'variables' => [	                		
-	                											'content' => 'from hook module',
-	            												],
-	              			],
-	  				'questionnaire' => [
-	            				'variables' => [	                		
-	                											'content' => 'from hook module',
-	            												],
-	              			], 	 
-	  				'question' => [
-	            				'variables' => [	                		
-	                											'content' => 'from hook module',
-	            												],
-	              			], 		              			             			         			
-	  				'result_pages' => [
-	            				'variables' => [	                		
-	                											'content' => 'from hook module',
-	            												],
-	              			], 		              			             			         			
-	  				'result_page' => [
-	            				'variables' => [	                		
-	                											'content' => 'from hook module',
-	            												],
-	              			],	              				  	
-    			];//return
+	return [
+	  'main' => [
+	    'variables' => [
+	      'content' => 'from hook module',
+      ],
+    ],
+	  'questionnaire' => [
+      'variables' => [
+        'content' => 'from hook module',
+      ],
+    ],
+	  'question' => [
+      'variables' => [
+        'content' => 'from hook module',
+      ],
+    ],
+	  'result_pages' => [
+      'variables' => [
+        'content' => 'from hook module',
+      ],
+    ],
+	  'result_page' => [
+      'variables' => [
+        'content' => 'from hook module',
+      ],
+    ],
+  ];//return
 }
 
 function questionnaire_page_attachments_alter(array &$page) {
   // Attach the flot asset on every page.
-    if (\Drupal::currentUser()->isAnonymous()) {
+    //if (\Drupal::currentUser()->isAnonymous()) {
         $page['#attached']['library'][] = 'questionnaire/questionnaire_lib';
-    }
+
 
 }

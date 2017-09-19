@@ -1,39 +1,40 @@
+<div id="questinnaire-main" class="questionnaire">
+	<table class="table">
+	  <thead>
+		<tr>
+		  <th>#</th>
+		  <th>{{'Title'|trans}}</th>
+		  <th>{{'Evrey # days'|trans}}</th>
+		  <th>{{'Description'|trans}}</th>
+		  <th>{{'Del'|trans}}</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		{% for q in content.questionnaires %}
+		  <tr>
+			<td>*</td>
+			<td><a href="questionnaire/{{q.id}}">{{q.title}}</a></td>
+			<td>{{q.days}}</td>
+			<td>{{q.description}}</td>
+			<td>
+					<form {{content.deleteForm.attributes }} method="post">
+						{{ content.deleteForm.form_build_id }}
+						{{ content.deleteForm.form_token }}
+						{{ content.deleteForm.form_id }}
+						{{ content.deleteForm.subject }}
+						{{ content.deleteForm.message }}
+						<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label">
+							<input data-drupal-selector="edit-id" type="text" id="edit-id" name="id" value="{{q.id}}" size="60" maxlength="128" placeholder="id" class="form-text required" required="required" aria-required="true" style="display:none">
+						</div>
+						{{ content.deleteForm.actions.submit }}
+					</form>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Title</th>
-      <th>Evrey # days</th>
-      <th>Description</th>
-      <th>del</th>
-    </tr>
-  </thead>
-  <tbody>
-	{% for q in content.questionnaires %}
-	  <tr>
-	    <td>*</td>
-	    <td><a href="questionnaire/{{q.id}}">{{q.title}}</a></td>
-	    <td>{{q.days}}</td>
-	    <td>{{q.description}}</td>
-	    <td>
-				<form {{content.deleteForm.attributes }} method="post">
-					{{ content.deleteForm.form_build_id }}
-					{{ content.deleteForm.form_token }}
-					{{ content.deleteForm.form_id }}
-					{{ content.deleteForm.subject }}
-					{{ content.deleteForm.message }}
-					<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label">
-						<input data-drupal-selector="edit-id" type="text" id="edit-id" name="id" value="{{q.id}}" size="60" maxlength="128" placeholder="id" class="form-text required" required="required" aria-required="true" style="display:none">
-					</div>					
-					{{ content.deleteForm.actions.submit }}
-				</form>
+			</td>
+		  </tr>
 
-	    </td>
-	  </tr>	
-	    
-	{% endfor %}
-  </tbody>
-</table>
+		{% endfor %}
+	  </tbody>
+	</table>
 
-{{content.addForm}}
+	{{content.addForm}}
+</div>

@@ -4,5 +4,39 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="PHP" type="php">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../core" />
+          <root url="file://$MODULE_DIR$/../../../libraries" />
+          <root url="file://$MODULE_DIR$/../../contrib" />
+          <root url="file://$MODULE_DIR$/../paragraph_translation_migration" />
+          <root url="file://$MODULE_DIR$/../storleden_deploy_domains" />
+          <root url="file://$MODULE_DIR$/../storleden_instagram" />
+          <root url="file://$MODULE_DIR$/../storleden_lunchmeny" />
+          <root url="file://$MODULE_DIR$/../storleden_misc" />
+          <root url="file://$MODULE_DIR$/../storleden_misc_lkk" />
+          <root url="file://$MODULE_DIR$/../storleden_search" />
+          <root url="file://$MODULE_DIR$/../storleden_sync" />
+          <root url="file://$MODULE_DIR$/../storleden_widget" />
+          <root url="file://$MODULE_DIR$/../visitlinkoping_categories" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../../../core" />
+          <root url="file://$MODULE_DIR$/../../../libraries" />
+          <root url="file://$MODULE_DIR$/../../contrib" />
+          <root url="file://$MODULE_DIR$/../paragraph_translation_migration" />
+          <root url="file://$MODULE_DIR$/../storleden_deploy_domains" />
+          <root url="file://$MODULE_DIR$/../storleden_instagram" />
+          <root url="file://$MODULE_DIR$/../storleden_lunchmeny" />
+          <root url="file://$MODULE_DIR$/../storleden_misc" />
+          <root url="file://$MODULE_DIR$/../storleden_misc_lkk" />
+          <root url="file://$MODULE_DIR$/../storleden_search" />
+          <root url="file://$MODULE_DIR$/../storleden_sync" />
+          <root url="file://$MODULE_DIR$/../storleden_widget" />
+          <root url="file://$MODULE_DIR$/../visitlinkoping_categories" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
