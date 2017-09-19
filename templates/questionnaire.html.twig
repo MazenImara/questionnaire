@@ -1,53 +1,65 @@
 <div class="questionnaire">
-	<form {{content.editQuestionnaireForm.attributes }} method="post">
-		{{ content.editQuestionnaireForm.form_build_id }}
-		{{ content.editQuestionnaireForm.form_token }}
-		{{ content.editQuestionnaireForm.form_id }}
-		{{ content.editQuestionnaireForm.subject }}
-		{{ content.editQuestionnaireForm.message }}
-		<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label" style="display:none">
-			<input data-drupal-selector="edit-id" type="text" id="edit-id--3" name="id" value="{{content.questionnaires.id}}" size="60" maxlength="128" placeholder="id" class="form-text required" required="required" aria-required="true">
-		</div>
-		<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-title form-item-title form-no-label">
-			<input data-drupal-selector="edit-title" type="text" id="edit-title--2" name="title" value="{{content.questionnaires.title}}" size="60" maxlength="128" placeholder="Titel" class="form-text required" required="required" aria-required="true">
-		</div>
-		<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-days form-item-days form-no-label">
-			<input data-drupal-selector="edit-days" aria-describedby="edit-days--description" type="text" id="edit-days" name="days" value="{{content.questionnaires.days}}" size="60" maxlength="128" class="form-text required" required="required" aria-required="true">
-			<div id="edit-days--description" class="description">
-			  Every ^ days
-			</div>
-		</div>
-		<div class="js-form-item form-item js-form-type-textarea form-type-textarea js-form-item-description form-item-description form-no-label">
-			<div class="form-textarea-wrapper">
-			  <textarea data-drupal-selector="edit-description" id="edit-description" name="description" rows="5" cols="60" placeholder="Questionnaire Description" class="form-textarea resize-1">{{content.questionnaires.description}}</textarea>
-			</div>
-		</div>
-		{{ content.editQuestionnaireForm.actions.submit }}
-	</form>
-
-
-
-	{% for question in content.questions %}
-		{% if question.textAnswer %}
-			<br>{{question.body}} ({{'Text Answer'|trans}})
-		{% else %}
-			<br><a href="/questionnaire/question/{{question.id}}">{{question.body}}</a>
-		{% endif %}
-
-		<form {{content.deleteQuestionForm.attributes }} method="post">
-			{{ content.deleteQuestionForm.form_build_id }}
-			{{ content.deleteQuestionForm.form_token }}
-			{{ content.deleteQuestionForm.form_id }}
-			{{ content.deleteQuestionForm.subject }}
-			{{ content.deleteQuestionForm.message }}
-			<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label">
-				<input data-drupal-selector="edit-id" type="text" id="edit-id" name="id" value="{{question.id}}" size="60" maxlength="128" placeholder="questionId" class="form-text required" required="required" aria-required="true" style="display:none">
-			</div>
-			{{ content.deleteQuestionForm.actions.submit }}
-		</form>
-	{% endfor %}
-
-
+	<h1>{{content.questionnaires.title}} <label class="label-link" for="item-1">( {{'Edit'|trans}} )</label> </h1>
+	<input type="checkbox" id="item-1" style="display:none">
+	
+	<div id="edit">
+		<form {{content.editQuestionnaireForm.attributes }} method="post">
+				{{ content.editQuestionnaireForm.form_build_id }}
+				{{ content.editQuestionnaireForm.form_token }}
+				{{ content.editQuestionnaireForm.form_id }}
+				{{ content.editQuestionnaireForm.subject }}
+				{{ content.editQuestionnaireForm.message }}
+				<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label" style="display:none">
+					<input data-drupal-selector="edit-id" type="text" id="edit-id--3" name="id" value="{{content.questionnaires.id}}" size="60" maxlength="128" placeholder="id" class="form-text required" required="required" aria-required="true">
+				</div>
+				<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-title form-item-title form-no-label">
+					<input data-drupal-selector="edit-title" type="text" id="edit-title--2" name="title" value="{{content.questionnaires.title}}" size="60" maxlength="128" placeholder="Titel" class="form-text required" required="required" aria-required="true">
+				</div>
+				<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-days form-item-days form-no-label">
+					<input data-drupal-selector="edit-days" aria-describedby="edit-days--description" type="text" id="edit-days" name="days" value="{{content.questionnaires.days}}" size="60" maxlength="128" class="form-text required" required="required" aria-required="true">
+					<div id="edit-days--description" class="description">
+					  Every ^ days
+					</div>
+				</div>
+				<div class="js-form-item form-item js-form-type-textarea form-type-textarea js-form-item-description form-item-description form-no-label">
+					<div class="form-textarea-wrapper">
+					  <textarea data-drupal-selector="edit-description" id="edit-description" name="description" rows="5" cols="60" placeholder="Questionnaire Description" class="form-textarea resize-1">{{content.questionnaires.description}}</textarea>
+					</div>
+				</div>
+				{{ content.editQuestionnaireForm.actions.submit }}
+			</form>
+	</div>
+	<table>
+	  <tr>
+	    <th>{{'Questions'|trans}}</th>
+	    <th>{{'Del'|trans}}</th>
+	  </tr>	
+		{% for question in content.questions %}
+		  <tr>
+		    <td>
+					{% if question.textAnswer %}
+						{{question.body}} ({{'Text Answer'|trans}})
+					{% else %}
+						{{question.body}}<a href="/questionnaire/question/{{question.id}}">({{'Add Answers'|trans}})</a>
+					{% endif %}		    
+		    </td>
+		    <td>
+					<form {{content.deleteQuestionForm.attributes }} method="post">
+						{{ content.deleteQuestionForm.form_build_id }}
+						{{ content.deleteQuestionForm.form_token }}
+						{{ content.deleteQuestionForm.form_id }}
+						{{ content.deleteQuestionForm.subject }}
+						{{ content.deleteQuestionForm.message }}
+						<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label">
+							<input data-drupal-selector="edit-id" type="text" id="edit-id" name="id" value="{{question.id}}" size="60" maxlength="128" placeholder="questionId" class="form-text required" required="required" aria-required="true" style="display:none">
+						</div>
+						{{ content.deleteQuestionForm.actions.submit }}
+					</form>
+		    </td>
+		  </tr>
+		{% endfor %}
+	</table>
+	<h4>{{'Add question'|trans}}</h4>
 	<form {{content.addQuestionForm.attributes }} method="post">
 		{{ content.addQuestionForm.form_build_id }}
 		{{ content.addQuestionForm.form_token }}
@@ -64,21 +76,33 @@
 	</form>
 
 	<h3>{{'Pages'|trans}}:</h3>
-	{% for page in content.pages %}
-	  {{page.title}} : {{page.link}}
-		<form {{content.unassignPageForm.attributes }} method="post">
-			{{ content.unassignPageForm.form_build_id }}
-			{{ content.unassignPageForm.form_token }}
-			{{ content.unassignPageForm.form_id }}
-			{{ content.unassignPageForm.subject }}
-			{{ content.unassignPageForm.message }}
-			<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label" style="display:none">
-				<input data-drupal-selector="edit-id" type="text" id="edit-id--2" name="id" value="{{page.id}}" size="60" maxlength="128" placeholder="assignedPageId" class="form-text required" required="required" aria-required="true">
-			</div>
-			{{ content.unassignPageForm.actions.submit }}
-		</form>
-	{% endfor %}
-
+	<table>
+	  <tr>
+	    <th> {{'Title'|trans}} </th>
+	    <th>{{'Link'|trans}}</th>
+	    <th>{{'Del'|trans}}</th>
+	  </tr>	
+		{% for page in content.pages %}
+		  <tr>
+		    <td>{{page.title}}</td>
+		    <td>{{page.link}}</td>
+		    <td>
+					<form {{content.unassignPageForm.attributes }} method="post">
+						{{ content.unassignPageForm.form_build_id }}
+						{{ content.unassignPageForm.form_token }}
+						{{ content.unassignPageForm.form_id }}
+						{{ content.unassignPageForm.subject }}
+						{{ content.unassignPageForm.message }}
+						<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label" style="display:none">
+							<input data-drupal-selector="edit-id" type="text" id="edit-id--2" name="id" value="{{page.id}}" size="60" maxlength="128" placeholder="assignedPageId" class="form-text required" required="required" aria-required="true">
+						</div>
+						{{ content.unassignPageForm.actions.submit }}
+					</form>
+		    </td>
+		  </tr>
+		{% endfor %}
+	</table>
+	<h4>{{'Assign page'|trans}}</h4>
 	<form {{content.assignPageForm.attributes }} method="post">
 		{{ content.assignPageForm.form_build_id }}
 		{{ content.assignPageForm.form_token }}

@@ -1,29 +1,42 @@
-{{content.question.body}}?
+<div class="questionnaire">
+	<h3>Q: {{content.question.body}}</h3>
+	<table>
+	  <tr>
+	    <th>{{'Answer'|trans}}</th>
+	    <th>{{'Del'|trans}}</th>
+	  </tr>
+		{% for a in content.answers %}
+		  <tr>
+		    <td>{{a.body}}</td>
+		    <td>
+					<form {{content.deleteForm.attributes }} method="post">
+						{{ content.deleteForm.form_build_id }}
+						{{ content.deleteForm.form_token }}
+						{{ content.deleteForm.form_id }}
+						{{ content.deleteForm.subject }}
+						{{ content.deleteForm.message }}
+						<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label">
+							<input data-drupal-selector="edit-id" type="text" id="edit-id" name="id" value="{{a.id}}" size="60" maxlength="128" placeholder="answerId" class="form-text required" required="required" aria-required="true" style="display:none">
+						</div>						
+						{{ content.deleteForm.actions.submit }}
+					</form> 
+		    </td>
+		  </tr>	
+   
+		{% endfor %}
+	</table>
+	<h4>{{'Add answer'|trans}}</h4>
+	<form {{content.addForm.attributes }} method="post">
+		{{ content.addForm.form_build_id }}
+		{{ content.addForm.form_token }}
+		{{ content.addForm.form_id }}
+		{{ content.addForm.subject }}
+		{{ content.addForm.message }}
+		{{ content.addForm.body }}
+		<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-questionid form-item-questionid form-no-label">
+			<input data-drupal-selector="edit-questionid" type="text" id="edit-questionid" name="questionId" value="{{content.question.id}}" size="60" maxlength="128" placeholder="questionId" class="form-text required" required="required" aria-required="true" style="display:none">
+		</div>
+		{{ content.addForm.actions.submit }}
+	</form>
 
-{% for a in content.answers %}
-    <br>{{a.body}}
-		<form {{content.deleteForm.attributes }} method="post">
-			{{ content.deleteForm.form_build_id }}
-			{{ content.deleteForm.form_token }}
-			{{ content.deleteForm.form_id }}
-			{{ content.deleteForm.subject }}
-			{{ content.deleteForm.message }}
-			<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-id form-item-id form-no-label">
-				<input data-drupal-selector="edit-id" type="text" id="edit-id" name="id" value="{{a.id}}" size="60" maxlength="128" placeholder="answerId" class="form-text required" required="required" aria-required="true" style="display:none">
-			</div>						
-			{{ content.deleteForm.actions.submit }}
-		</form>    
-{% endfor %}
-
-<form {{content.addForm.attributes }} method="post">
-	{{ content.addForm.form_build_id }}
-	{{ content.addForm.form_token }}
-	{{ content.addForm.form_id }}
-	{{ content.addForm.subject }}
-	{{ content.addForm.message }}
-	{{ content.addForm.body }}
-	<div class="js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-questionid form-item-questionid form-no-label">
-		<input data-drupal-selector="edit-questionid" type="text" id="edit-questionid" name="questionId" value="{{content.question.id}}" size="60" maxlength="128" placeholder="questionId" class="form-text required" required="required" aria-required="true" style="display:none">
-	</div>
-	{{ content.addForm.actions.submit }}
-</form>
+</div>

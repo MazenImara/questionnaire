@@ -1,6 +1,69 @@
 .questionnaire{
-    margin-left: 15px;
+  margin-left: 15px;
+
+  table, th, td {
+    padding-right: 30px;
+  }
+
+  input{
+    margin-bottom: 10px;
+  }
+  textarea{
+    margin: 5px 0px 5px 0px;
+  }
+  a:link {
+      text-decoration: underline;
+  }
+
+  a:visited {
+      text-decoration: underline;
+  }
+
+  a:hover {
+      text-decoration: none;
+  }
+
+  a:active {
+      text-decoration: none;
+  }
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #3f3f3f;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #3f3f3f;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #3f3f3f;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: #3f3f3f;
+  }
+
+  .label-link{
+    font-size: 16px;
+    text-decoration:underline
+  }
+  .label-link:hover {
+    text-decoration:none; 
+  }
+  #item-1[type=checkbox]:checked + #edit {
+    display: block;
+  }
 }
+
+#edit{
+  display: none;
+}
+.results-table{
+  table {
+      border-collapse: collapse;
+  }
+   table, th, td {
+      border: 1px solid black;
+      text-align: center;
+  }
+}  
 
 /* The Modal (background) */
 #myModal {

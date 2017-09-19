@@ -315,6 +315,7 @@ class methods {
 
 	static public function saveResult($post) {
 		$answers = [];
+		$link = '';
 		foreach ($post as $a) {
 			if (explode(',', $a['name'])[0] != 'textArea') {
 				$text = explode(',', $a['value']);
