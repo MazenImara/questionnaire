@@ -67,23 +67,22 @@ class methods {
 		if ($question['textAnswer']) {
 			if ($TQuestion < 1) {
 				\Drupal::database()->insert('questionnaire_question')
-			                   ->fields(['body', 'multichoice', 'textAnswer', 'questionnaireId'])
-			                   ->values([$question['body'], $question['multichoice'], $question['textAnswer'], $question['questionnaireId']])
-			                   ->execute();
+				                   ->fields(['body', 'multichoice', 'textAnswer', 'questionnaireId'])
+				                   ->values([$question['body'], $question['multichoice'], $question['textAnswer'], $question['questionnaireId']])
+				                   ->execute();
 			} else {
 				drupal_set_message(t('You can not add more than one text answer question, delete the old and add new one'), 'error');
 			}
-			
-		}
-		else {
+
+		} else {
 			if ($RQuestion < 4) {
 				\Drupal::database()->insert('questionnaire_question')
-			                   ->fields(['body', 'multichoice', 'textAnswer', 'questionnaireId'])
-			                   ->values([$question['body'], $question['multichoice'], $question['textAnswer'], $question['questionnaireId']])
-			                   ->execute();
+				                   ->fields(['body', 'multichoice', 'textAnswer', 'questionnaireId'])
+				                   ->values([$question['body'], $question['multichoice'], $question['textAnswer'], $question['questionnaireId']])
+				                   ->execute();
 			} else {
 				drupal_set_message(t('You can not add more than four Radio answer question, delete the old and add new one'), 'error');
-			}			
+			}
 		}
 	}
 
@@ -206,13 +205,13 @@ class methods {
 		                   ->execute();
 	}
 	static public function deletePage($id) {
-	  $link = self::getPageById($id)['link'];
-    \Drupal::database()->delete('questionnaire_textanswer', [])
-      ->condition('link', $link)
-      ->execute();
-    \Drupal::database()->delete('questionnaire_result', [])
-      ->condition('link', $link)
-      ->execute();
+		$link = self::getPageById($id)['link'];
+		\Drupal::database()->delete('questionnaire_textanswer', [])
+		                   ->condition('link', $link)
+		                   ->execute();
+		\Drupal::database()->delete('questionnaire_result', [])
+		                   ->condition('link', $link)
+		                   ->execute();
 		\Drupal::database()->delete('questionnaire_page', [])
 		                   ->condition('id', [$id])
 		                   ->execute();
@@ -315,7 +314,6 @@ class methods {
 
 	static public function saveResult($post) {
 		$answers = [];
-		$link = '';
 		foreach ($post as $a) {
 			if (explode(',', $a['name'])[0] != 'textArea') {
 				$text = explode(',', $a['value']);
@@ -324,8 +322,10 @@ class methods {
 						'question' => $text[1],
 						'answer'   => $text[2],
 					]);
+				$link = $text[0];
 			} else {
 				self::saveTextAnswer($a);
+				$link = explode(',', $a['name'])[1];
 			}
 		}
 
@@ -346,9 +346,9 @@ class methods {
 					->execute();
 			}
 		}
-    if (!$link = self::getPageByLink($answers[0]['link'])){
-		  self::addPage(self::getAssignedPageByLink($link));
-    }
+		if (!self::getPageByLink($link)) {
+			self::addPage(self::getAssignedPageByLink($link));
+		}
 	}
 
 	static public function saveTextAnswer($answer) {
@@ -455,15 +455,13 @@ class methods {
 		return $question;
 	}
 
-	static public function deleteResultQuestion($question)
-	{
+	static public function deleteResultQuestion($question) {
 		\Drupal::database()->delete('questionnaire_result', [])
 		                   ->condition('question', $question['question'])
 		                   ->condition('link', $question['link'])
 		                   ->execute();
-	}	
-	static public function deleteTextResultQuestion($question)
-	{
+	}
+	static public function deleteTextResultQuestion($question) {
 		\Drupal::database()->delete('questionnaire_textanswer', [])
 		                   ->condition('question', $question['question'])
 		                   ->condition('link', $question['link'])
