@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c991817-7b2d-499b-850f-0edf21f0b326" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/questionnaire.iml" afterPath="$PROJECT_DIR$/.idea/questionnaire.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/questionnaire.css" afterPath="$PROJECT_DIR$/css/questionnaire.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/questionnaire.module" afterPath="$PROJECT_DIR$/questionnaire.module" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/questionnaire.scss" afterPath="$PROJECT_DIR$/sass/questionnaire.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Classes/methods.php" afterPath="$PROJECT_DIR$/src/Classes/methods.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/main.html.twig" afterPath="$PROJECT_DIR$/templates/main.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/questionnaire.html.twig" afterPath="$PROJECT_DIR$/templates/questionnaire.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/src/Classes/methods.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="280">
-              <caret line="210" column="31" lean-forward="false" selection-start-line="210" selection-start-column="31" selection-end-line="210" selection-end-column="31" />
+              <caret line="342" column="20" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="470" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -54,6 +48,11 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>getpageBylink</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -197,12 +196,12 @@
       <updated>1505745379860</updated>
       <workItem from="1505745427532" duration="19000" />
       <workItem from="1505746553418" duration="478000" />
-      <workItem from="1505801469478" duration="5477000" />
+      <workItem from="1505801469478" duration="7273000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5974000" />
+    <option name="totallyTimeSpent" value="7770000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2092" y="-17" width="1609" height="1059" extended-state="6" />
@@ -329,7 +328,7 @@
     <entry file="file://$PROJECT_DIR$/src/Classes/methods.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
-          <caret line="210" column="31" lean-forward="false" selection-start-line="210" selection-start-column="31" selection-end-line="210" selection-end-column="31" />
+          <caret line="342" column="20" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="470" selection-end-column="8" />
           <folding />
         </state>
       </provider>

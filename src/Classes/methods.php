@@ -345,7 +345,9 @@ class methods {
 					->execute();
 			}
 		}
-
+    if (!$link = self::getPageByLink($answers[0]['link'])){
+		  self::addPage(self::getAssignedPageByLink($link));
+    }
 	}
 
 	static public function saveTextAnswer($answer) {
